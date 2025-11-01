@@ -53,7 +53,7 @@ jobs:
         run: pnpm install
 
       - name: Build Hugo site
-        run: hugo --minify -v
+        run: hugo --minify
 
       - name: Generate search index
         run: pnpm --prefix themes/hugo-butterfly exec pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main
@@ -111,7 +111,7 @@ jobs:
         run: pnpm install
 
       - name: Build Hugo site
-        run: hugo --minify -v
+        run: hugo --minify
 
       - name: Generate search index
         run: pnpm --prefix themes/hugo-butterfly exec pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main

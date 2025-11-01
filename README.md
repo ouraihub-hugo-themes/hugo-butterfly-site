@@ -8,211 +8,88 @@
 
 ### 📖 项目介绍
 
-这是 **Hugo Butterfly 主题** 的完整示例网站，展示了如何使用Hugo和Butterfly主题构建一个支持多语言的现代化博客网站。
+这是 **Hugo Butterfly 主题** 的完整示例网站，包含中文、英文、繁体中文三种语言支持。
 
 ### ✨ 主要特性
 
-- **三语言支持**: 中文 (zh)、英文 (en)、繁体中文 (zh-tw)
+- **三语言支持**: 中文、英文、繁体中文
 - **响应式设计**: 完美适配各种设备
-- **主题切换**: 8种主题颜色方案可选
-- **搜索功能**: 内置Pagefind搜索
-- **代码高亮**: 支持多种编程语言
-- **社交分享**: 集成社交媒体分享
-- **评论系统**: 支持Giscus、Gitalk等多种评论方案
-
-### 📁 项目结构
-
-```
-hugo-butterfly-site/
-├── config/              # Hugo配置
-│   └── _default/
-│       ├── hugo.toml           # 主Hugo配置
-│       ├── languages.toml       # 多语言配置
-│       ├── params.toml          # 主题参数
-│       ├── params.zh.toml       # 中文参数
-│       ├── params.en.toml       # 英文参数
-│       └── params.zh-tw.toml    # 繁体参数
-├── content/             # 网站内容
-│   ├── zh/              # 中文内容
-│   ├── en/              # 英文内容
-│   └── zh-tw/           # 繁体内容
-├── i18n/                # 国际化翻译
-│   ├── zh.toml
-│   ├── en.toml
-│   └── zh-tw.toml
-├── themes/              # Hugo主题
-│   └── hugo-butterfly/  # 主题子模块
-├── static/              # 静态文件
-├── layouts/             # 自定义布局
-├── .github/workflows/   # GitHub Actions
-│   └── deploy.yml       # 自动部署工作流
-└── DEPLOYMENT-*.md      # 部署文档
-
-```
+- **8种主题**: 冷色和暖色主题可选
+- **搜索功能**: Pagefind 全文搜索
+- **代码高亮**: 多种编程语言支持
 
 ### 🚀 快速开始
 
-#### 本地开发
-
+#### 本地开发（无搜索）
 ```bash
-# 克隆仓库（包含子模块）
-git clone --recurse-submodules https://github.com/ouraihub-hugo-themes/hugo-butterfly-site.git
-cd hugo-butterfly-site
-
-# 运行Hugo开发服务器
 hugo server
-
 # 访问 http://localhost:1313
 ```
 
-#### 构建生产版本
-
+#### 完整构建（含搜索索引）
 ```bash
-# 构建静态网站
-hugo --minify
-
-# 生成的网站在 public/ 目录中
+pnpm install
+pnpm run build
+pnpm run preview
 ```
 
-### 🔧 配置指南
-
-#### 修改网站信息
-
-编辑 `config/_default/params.toml`:
-
-```toml
-# 网站标题
-title = "Hugo Butterfly"
-
-# 网站描述
-description = "A beautiful Hugo theme"
-
-# 作者信息
-[author]
-name = "Your Name"
-```
-
-#### 添加新文章
-
-创建新文章最简单的方法：
-
+#### 开发构建（含搜索，较快）
 ```bash
-hugo new zh/posts/my-first-post.md
-# 或
-hugo new en/posts/my-first-post.md
-hugo new zh-tw/posts/my-first-post.md
+pnpm install
+pnpm run build:dev
+pnpm run preview
 ```
 
-然后编辑生成的Markdown文件。
+### 📚 pnpm 脚本说明
 
-#### 配置社交媒体
-
-编辑 `config/_default/params.toml` 中的 `[[social]]` 部分：
-
-```toml
-[[social]]
-icon = 'fab fa-github'
-name = 'GitHub'
-url = 'https://github.com/your-username'
-```
-
-### 🎨 主题选项
-
-修改 `config/_default/params.toml` 中的主题相关设置：
-
-```toml
-# 启用暗黑模式
-dark = true
-
-# 默认主题（如果实现了主题切换）
-defaultTheme = "sapphire"
-```
-
-### 📚 内容管理
-
-#### 文章前置信息 (Front Matter)
-
-```markdown
----
-title: "我的第一篇文章"
-date: 2025-01-01T12:00:00Z
-updated: 2025-01-02T12:00:00Z
-draft: false
-categories:
-  - 技术
-tags:
-  - Hugo
-  - Butterfly
----
-
-# 文章内容从这里开始
-```
-
-#### 支持的Markdown特性
-
-- 代码块高亮
-- 表格
-- 脚注
-- 任务列表
-- 删除线
-- 上标/下标
-- 数学公式 (可选)
-- Mermaid图表 (可选)
-
-### 🌐 多语言配置
-
-本网站支持三种语言：
-
-| 代码 | 语言 | 权重 |
+| 命令 | 说明 | 用途 |
 |------|------|------|
-| zh | 中文 | 1 (默认) |
-| en | 英文 | 2 |
-| zh-tw | 繁体中文 | 3 |
+| `pnpm install` | 安装依赖 | 必须先运行 |
+| `pnpm run build` | 生产构建+搜索索引 | 部署到生产环境 |
+| `pnpm run build:dev` | 开发构建+搜索索引 | 本地测试搜索 |
+| `pnpm run dev` | 快速开发服务器 | 快速开发（无搜索） |
+| `pnpm run preview` | 预览构建结果 | 查看生产版本效果 |
+| `pnpm run clean` | 清理构建产物 | 清理 public/ 和缓存 |
 
-修改 `config/_default/languages.toml` 来调整语言设置。
+### 🔍 搜索功能部署
 
-### 🔄 更新主题
-
-主题通过Git子模块管理，更新方法：
-
+**本地测试搜索：**
 ```bash
-# 进入主题目录
-cd themes/hugo-butterfly
-
-# 拉取最新版本
-git pull origin master
-
-# 返回到项目根目录
-cd ../..
-
-# 提交更新
-git add themes/hugo-butterfly
-git commit -m "Update hugo-butterfly theme"
-git push
+pnpm install
+pnpm run build:dev
+pnpm run preview
+# 访问 http://localhost:1313 并测试搜索
 ```
 
-### 📖 更多文档
+**验证搜索生成成功：**
+```bash
+ls -la public/_pagefind/
+# 应该看到 pagefind.js, pagefind.json, ui.js, ui.css
+```
 
-- `DEPLOYMENT-PLAN.md` - 部署规划
-- `DEPLOYMENT-VERIFICATION.md` - 部署验证清单
-- `GITHUB-DEPLOYMENT-CHECKLIST.md` - GitHub部署检查清单
+**GitHub Actions 自动部署：**
+- 工作流文件: `.github/workflows/deploy.yml`
+- 自动执行: Hugo构建 → Pagefind索引生成 → 部署到GitHub Pages
+- 搜索索引会自动在部署时生成
+
+### 📝 添加新文章
+
+```bash
+hugo new zh/posts/my-post.md     # 中文
+hugo new en/posts/my-post.md     # 英文
+hugo new zh-tw/posts/my-post.md  # 繁体
+```
+
+### 🔧 配置文件
+
+所有配置位于 `config/_default/`：
+- `hugo.toml` - Hugo 主配置
+- `languages.toml` - 多语言设置
+- `params.toml` - 主题参数
 
 ### 🌍 在线访问
 
-构建后的示例网站托管在GitHub Pages：
-
-👉 **https://hugobutterfly.github.io**
-
-### 📝 许可证
-
-本项目采用 MIT 许可证。详见 LICENSE 文件。
-
-### 💬 反馈与支持
-
-如有问题或建议，请：
-- 提交Issue
-- 发起Pull Request
-- 联系项目维护者
+https://hugobutterfly.github.io
 
 ---
 
@@ -220,79 +97,135 @@ git push
 
 ### 📖 Introduction
 
-This is a complete example website for the **Hugo Butterfly theme**, demonstrating how to build a modern multilingual blog using Hugo and the Butterfly theme.
+This is a complete example website for the **Hugo Butterfly theme** with support for Chinese, English, and Traditional Chinese.
 
 ### ✨ Features
 
-- **Multilingual Support**: Chinese (zh), English (en), Traditional Chinese (zh-tw)
-- **Responsive Design**: Perfect on all devices
-- **Theme Switching**: 8 color theme options
-- **Search**: Built-in Pagefind search
-- **Code Highlighting**: Support for multiple programming languages
-- **Social Sharing**: Integrated social media sharing
-- **Comments**: Support for Giscus, Gitalk, and more
+- **Multilingual**: Chinese, English, Traditional Chinese
+- **Responsive**: Works on all devices
+- **8 Themes**: Cool and warm color schemes
+- **Search**: Pagefind full-text search
+- **Code Highlight**: Multiple programming languages
 
 ### 🚀 Quick Start
 
+#### Development mode (no search)
 ```bash
-# Clone with submodules
-git clone --recurse-submodules https://github.com/ouraihub-hugo-themes/hugo-butterfly-site.git
-cd hugo-butterfly-site
-
-# Run development server
 hugo server
 ```
 
-Visit `http://localhost:1313`
+#### Full build (with search)
+```bash
+pnpm install
+pnpm run build
+pnpm run preview
+```
 
-### 📚 Documentation
+#### Dev build (with search, faster)
+```bash
+pnpm install
+pnpm run build:dev
+pnpm run preview
+```
 
-- `DEPLOYMENT-PLAN.md` - Deployment planning
-- `DEPLOYMENT-VERIFICATION.md` - Deployment verification
-- `GITHUB-DEPLOYMENT-CHECKLIST.md` - GitHub deployment checklist
+### 📚 pnpm Scripts
+
+| Command | Description | Usage |
+|---------|-------------|-------|
+| `pnpm install` | Install dependencies | Must run first |
+| `pnpm run build` | Production build + search | Deploy to production |
+| `pnpm run build:dev` | Dev build + search | Test search locally |
+| `pnpm run dev` | Quick dev server | Fast development |
+| `pnpm run preview` | Preview build result | Check production look |
+| `pnpm run clean` | Clean artifacts | Clean public/ & cache |
+
+### 🔍 Search Deployment
+
+**Test search locally:**
+```bash
+pnpm install
+pnpm run build:dev
+pnpm run preview
+# Visit http://localhost:1313 and test search
+```
+
+**Verify search generation:**
+```bash
+ls -la public/_pagefind/
+# Should see: pagefind.js, pagefind.json, ui.js, ui.css
+```
+
+**GitHub Actions auto-deployment:**
+- Workflow: `.github/workflows/deploy.yml`
+- Auto-runs: Hugo build → Pagefind indexing → Deploy
+- Search index generated automatically during deployment
 
 ### 🌍 Live Demo
 
-👉 **https://hugobutterfly.github.io**
+https://hugobutterfly.github.io
 
 ---
 
-## 繁体中文版本
+## 繁體中文版本
 
 ### 📖 專案介紹
 
-這是 **Hugo Butterfly 主題** 的完整示例網站，展示如何使用Hugo和Butterfly主題建立一個支持多語言的現代化部落格網站。
+這是 **Hugo Butterfly 主題** 的完整示例網站，支持中文、英文、繁體中文三種語言。
 
 ### ✨ 主要特性
 
-- **三語言支持**: 中文 (zh)、英文 (en)、繁體中文 (zh-tw)
+- **三語言支持**: 中文、英文、繁體中文
 - **響應式設計**: 完美適配各種設備
-- **主題切換**: 8種主題顏色方案可選
-- **搜索功能**: 內置Pagefind搜索
-- **代碼高亮**: 支持多種編程語言
-- **社交分享**: 集成社交媒體分享
-- **評論系統**: 支持Giscus、Gitalk等多種評論方案
+- **8種主題**: 冷色和暖色主題可選
+- **搜索功能**: Pagefind 全文搜索
+- **代碼高亮**: 多種編程語言支持
 
 ### 🚀 快速開始
 
+#### 開發模式（無搜索）
 ```bash
-# 克隆倉庫（包含子模組）
-git clone --recurse-submodules https://github.com/ouraihub-hugo-themes/hugo-butterfly-site.git
-cd hugo-butterfly-site
-
-# 運行Hugo開發服務器
 hugo server
 ```
 
-訪問 `http://localhost:1313`
+#### 完整構建（含搜索）
+```bash
+pnpm install
+pnpm run build
+pnpm run preview
+```
 
-### 📚 文檔
+#### 開發構建（含搜索，較快）
+```bash
+pnpm install
+pnpm run build:dev
+pnpm run preview
+```
 
-- `DEPLOYMENT-PLAN.md` - 部署規劃
-- `DEPLOYMENT-VERIFICATION.md` - 部署驗證
-- `GITHUB-DEPLOYMENT-CHECKLIST.md` - GitHub部署檢查清單
+### 📚 pnpm 指令
+
+| 指令 | 說明 | 用途 |
+|------|------|------|
+| `pnpm install` | 安裝依賴 | 必須先運行 |
+| `pnpm run build` | 生產構建+搜索索引 | 部署到生產環境 |
+| `pnpm run build:dev` | 開發構建+搜索索引 | 本地測試搜索 |
+| `pnpm run dev` | 快速開發服務器 | 快速開發 |
+| `pnpm run preview` | 預覽構建結果 | 查看生產版本 |
+| `pnpm run clean` | 清理構建產物 | 清理 public/ |
+
+### 🔍 搜索部署
+
+**本地測試搜索：**
+```bash
+pnpm install
+pnpm run build:dev
+pnpm run preview
+```
+
+**驗證搜索生成：**
+```bash
+ls -la public/_pagefind/
+```
 
 ### 🌍 線上訪問
 
-👉 **https://hugobutterfly.github.io**
-
+https://hugobutterfly.github.io

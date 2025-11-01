@@ -128,4 +128,4 @@ jobs:
           git commit -m "Deploy from hugo-butterfly-site: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "Nothing to commit"
           git push origin master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGES_REPO_TOKEN: ${{ secrets.PAGES_REPO_TOKEN }}

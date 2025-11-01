@@ -103,16 +103,26 @@ jobs:
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
 
-      - name: Clone pages repo
+      - name: Clone or create pages repo
         run: |
-          git clone https://${{ secrets.PAGES_REPO_TOKEN }}@github.com/hugobutterfly/hugobutterfly.github.io.git pages-repo
+          if git clone https://${{ secrets.PAGES_REPO_TOKEN }}@github.com/hugobutterfly/hugobutterfly.github.io.git pages-repo 2>/dev/null; then
+            echo "Repository cloned successfully"
+          else
+            echo "Repository is empty or doesn't exist, creating new one"
+            mkdir -p pages-repo
+            cd pages-repo
+            git init
+            git config user.email "action@github.com"
+            git config user.name "GitHub Action"
+            cd ..
+          fi
         env:
           PAGES_REPO_TOKEN: ${{ secrets.PAGES_REPO_TOKEN }}
 
       - name: Copy built site
         run: |
           cd pages-repo
-          rm -rf *
+          rm -rf .git *
           cd ..
           cp -r public/* pages-repo/
           touch pages-repo/.nojekyll
@@ -122,6 +132,8 @@ jobs:
           cd pages-repo
           git add -A
           git commit -m "Deploy from hugo-butterfly-site: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "Nothing to commit"
-          git push origin master
+          git remote add origin https://${{ secrets.PAGES_REPO_TOKEN }}@github.com/hugobutterfly/hugobutterfly.github.io.git
+          git branch -M master
+          git push -u origin master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGES_REPO_TOKEN: ${{ secrets.PAGES_REPO_TOKEN }}

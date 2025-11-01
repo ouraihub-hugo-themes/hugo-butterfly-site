@@ -102,6 +102,7 @@ jobs:
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
+          git config --global core.quotepath false
 
       - name: Clone pages repo
         run: |
@@ -120,6 +121,9 @@ jobs:
       - name: Commit and push to pages repo
         run: |
           cd pages-repo
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git config core.quotepath false
           git add -A
           git commit -m "Deploy from hugo-butterfly-site: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "Nothing to commit"
           git push origin master

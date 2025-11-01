@@ -59,7 +59,7 @@ jobs:
         run: pnpm --prefix themes/hugo-butterfly exec pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './public'
 
@@ -72,7 +72,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
 
   push-to-pages-repo:
     runs-on: ubuntu-latest

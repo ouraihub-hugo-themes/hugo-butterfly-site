@@ -56,7 +56,9 @@ jobs:
         run: hugo --minify
 
       - name: Generate search index
-        run: pnpm --prefix themes/hugo-butterfly exec pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main
+        run: |
+          cd themes/hugo-butterfly
+          pnpm exec pagefind --site ../../public --output-subdir _pagefind --force-language zh --root-selector main
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -114,7 +116,9 @@ jobs:
         run: hugo --minify
 
       - name: Generate search index
-        run: pnpm --prefix themes/hugo-butterfly exec pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main
+        run: |
+          cd themes/hugo-butterfly
+          pnpm exec pagefind --site ../../public --output-subdir _pagefind --force-language zh --root-selector main
 
       - name: Configure git
         run: |

@@ -1,0 +1,49 @@
+# Hugo build outputs
+public/
+resources/
+.hugo_build.lock
+hugo_stats.json
+
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Misc
+*.bak
+*.tmp
+*.swp
+.vscode-settings

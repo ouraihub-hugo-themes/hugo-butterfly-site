@@ -1,0 +1,122 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        working-directory: ./themes/hugo-butterfly
+        run: |
+          npm install || true
+
+      - name: Build Hugo site
+        run: |
+          hugo --minify -v
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './public'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+  push-to-pages-repo:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        working-directory: ./themes/hugo-butterfly
+        run: |
+          npm install || true
+
+      - name: Build Hugo site
+        run: |
+          hugo --minify -v
+
+      - name: Configure git
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+      - name: Clone pages repo
+        run: |
+          git clone https://${{ secrets.PAGES_REPO_TOKEN }}@github.com/hugobutterfly/hugobutterfly.github.io.git pages-repo
+        env:
+          PAGES_REPO_TOKEN: ${{ secrets.PAGES_REPO_TOKEN }}
+
+      - name: Copy built site
+        run: |
+          cd pages-repo
+          rm -rf *
+          cd ..
+          cp -r public/* pages-repo/
+          touch pages-repo/.nojekyll
+
+      - name: Commit and push to pages repo
+        run: |
+          cd pages-repo
+          git add -A
+          git commit -m "Deploy from hugo-butterfly-site: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" || echo "Nothing to commit"
+          git push origin master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

@@ -25,6 +25,11 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Update theme to latest version
+        run: |
+          rm -rf themes/hugo-butterfly
+          git clone --depth 1 https://github.com/ouraihub-hugo-themes/hugo-butterfly.git themes/hugo-butterfly
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -77,6 +82,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
+
+      - name: Update theme to latest version
+        run: |
+          rm -rf themes/hugo-butterfly
+          git clone --depth 1 https://github.com/ouraihub-hugo-themes/hugo-butterfly.git themes/hugo-butterfly
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2

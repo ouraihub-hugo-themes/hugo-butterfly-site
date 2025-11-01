@@ -1,6 +1,6 @@
 # 基础配置 - 所有环境共享
 
-baseURL = 'https://example.org/'
+baseURL = 'https://hugobutterfly.github.io/'
 languageCode = 'zh-cn'
 defaultContentLanguage = 'zh'
 title = '我的 Butterfly 博客'

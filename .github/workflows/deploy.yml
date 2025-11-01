@@ -37,14 +37,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install theme dependencies
         working-directory: ./themes/hugo-butterfly
         run: |
-          npm install || true
+          npm install || pnpm install || true
 
       - name: Build Hugo site
         run: |
           hugo --minify -v
+
+      - name: Generate search index with Pagefind
+        run: |
+          cd themes/hugo-butterfly
+          npm install pagefind || pnpm add pagefind || true
+          cd ../..
+          npx pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
@@ -83,14 +90,21 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install theme dependencies
         working-directory: ./themes/hugo-butterfly
         run: |
-          npm install || true
+          npm install || pnpm install || true
 
       - name: Build Hugo site
         run: |
           hugo --minify -v
+
+      - name: Generate search index with Pagefind
+        run: |
+          cd themes/hugo-butterfly
+          npm install pagefind || pnpm add pagefind || true
+          cd ../..
+          npx pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main || true
 
       - name: Configure git
         run: |
@@ -119,4 +133,3 @@ jobs:
           git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-

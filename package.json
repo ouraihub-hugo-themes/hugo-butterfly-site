@@ -1,0 +1,26 @@
+{
+  "name": "hugo-butterfly-site",
+  "version": "1.0.0",
+  "description": "Example website for Hugo Butterfly theme with multi-language support",
+  "main": "index.js",
+  "scripts": {
+    "install:theme": "cd themes/hugo-butterfly && pnpm install && cd ../..",
+    "build": "pnpm run install:theme && hugo --minify && pnpm --prefix themes/hugo-butterfly exec pagefind --site ../../public --output-subdir _pagefind --force-language zh --root-selector main",
+    "build:dev": "pnpm run install:theme && hugo && pnpm --prefix themes/hugo-butterfly exec pagefind --site ../../public --output-subdir _pagefind --force-language zh --root-selector main",
+    "dev": "hugo server --buildDrafts --buildFuture",
+    "preview": "pnpm run build && hugo server --disableLiveReload",
+    "clean": "rm -rf public resources"
+  },
+  "keywords": [
+    "hugo",
+    "theme",
+    "butterfly",
+    "blog",
+    "multilingual"
+  ],
+  "author": "Hugo Butterfly",
+  "license": "MIT",
+  "devDependencies": {
+    "pagefind": "^1.4.0"
+  }
+}

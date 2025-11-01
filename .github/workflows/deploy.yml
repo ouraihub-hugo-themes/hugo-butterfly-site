@@ -40,23 +40,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
+          cache-dependency-path: './themes/hugo-butterfly/pnpm-lock.yaml'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
 
       - name: Install theme dependencies
         working-directory: ./themes/hugo-butterfly
-        run: |
-          npm install || pnpm install || true
+        run: pnpm install
 
       - name: Build Hugo site
-        run: |
-          hugo --minify -v
+        run: hugo --minify -v
 
-      - name: Generate search index with Pagefind
-        run: |
-          cd themes/hugo-butterfly
-          npm install pagefind || pnpm add pagefind || true
-          cd ../..
-          npx pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main || true
+      - name: Generate search index
+        run: pnpm --prefix themes/hugo-butterfly exec pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
@@ -98,23 +98,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
+          cache-dependency-path: './themes/hugo-butterfly/pnpm-lock.yaml'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
 
       - name: Install theme dependencies
         working-directory: ./themes/hugo-butterfly
-        run: |
-          npm install || pnpm install || true
+        run: pnpm install
 
       - name: Build Hugo site
-        run: |
-          hugo --minify -v
+        run: hugo --minify -v
 
-      - name: Generate search index with Pagefind
-        run: |
-          cd themes/hugo-butterfly
-          npm install pagefind || pnpm add pagefind || true
-          cd ../..
-          npx pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main || true
+      - name: Generate search index
+        run: pnpm --prefix themes/hugo-butterfly exec pagefind --site public --output-subdir _pagefind --force-language zh --root-selector main
 
       - name: Configure git
         run: |

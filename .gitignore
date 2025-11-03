@@ -47,3 +47,4 @@ pnpm-debug.log*
 *.tmp
 *.swp
 .vscode-settings
+themes/hugo-butterfly/

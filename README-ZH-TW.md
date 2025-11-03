@@ -1,5 +1,8 @@
 # Hugo Butterfly 示例網站
 
+[简体中文](README.md) | [English](README-EN.md) | 繁體中文
+
+---
 ### 📖 專案介紹
 
 這是 **Hugo Butterfly 主題** 的完整示例網站，支持中文、英文、繁體中文三種語言。

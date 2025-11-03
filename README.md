@@ -1,5 +1,9 @@
 # Hugo Butterfly 示例网站
 
+简体中文| [English](README-EN.md) | [繁體中文](README-ZH-TW.md)
+
+---
+
 ### 📖 项目介绍
 
 这是 **Hugo Butterfly 主题** 的完整示例网站，包含中文、英文、繁体中文三种语言支持。
@@ -34,7 +38,7 @@ pnpm run build:dev
 pnpm run preview
 ```
 
-### 📚 pnpm 脚本说明
+###  pnpm 脚本说明
 
 | 命令 | 说明 | 用途 |
 |------|------|------|
@@ -45,7 +49,7 @@ pnpm run preview
 | `pnpm run preview` | 预览构建结果 | 查看生产版本效果 |
 | `pnpm run clean` | 清理构建产物 | 清理 public/ 和缓存 |
 
-### 🔍 搜索功能部署
+###  搜索功能部署
 
 **本地测试搜索：**
 ```bash
@@ -63,10 +67,10 @@ ls -la public/_pagefind/
 
 **GitHub Actions 自动部署：**
 - 工作流文件: `.github/workflows/deploy.yml`
-- 自动执行: Hugo构建 → Pagefind索引生成 → 部署到GitHub Pages
+- 自动执行: Hugo构建  Pagefind索引生成  部署到GitHub Pages
 - 搜索索引会自动在部署时生成
 
-### 📝 添加新文章
+###  添加新文章
 
 ```bash
 hugo new zh/posts/my-post.md     # 中文
@@ -74,21 +78,18 @@ hugo new en/posts/my-post.md     # 英文
 hugo new zh-tw/posts/my-post.md  # 繁体
 ```
 
-### 🔧 配置文件
+###  配置文件
 
 所有配置位于 `config/_default/`：
 - `hugo.toml` - Hugo 主配置
 - `languages.toml` - 多语言设置
 - `params.toml` - 主题参数
 
-### 🌍 在线访问
+###  在线访问
 
 https://hugobutterfly.github.io
 
-### 📖 部署指南
+###  文档
 
-详见 [README-EN.md](README-EN.md) (英文) | [README-ZH-TW.md](README-ZH-TW.md) (繁体)
-
-### 📖 部署指南
-
-详见 [DEPLOYMENT-ZH.md](DEPLOYMENT-ZH.md)
+- [部署指南](DEPLOYMENT-ZH.md)
+- [主题文档](https://github.com/ouraihub-hugo-themes/hugo-butterfly)

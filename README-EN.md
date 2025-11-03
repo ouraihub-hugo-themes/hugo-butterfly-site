@@ -1,6 +1,6 @@
 # Hugo Butterfly Demo Site
 
-[简体中文](README-ZH.md) | English | [繁體中文](README-ZH-TW.md)
+[简体中文](README.md) | English | [繁體中文](README-ZH-TW.md)
 
 ---
 

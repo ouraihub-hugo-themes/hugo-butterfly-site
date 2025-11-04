@@ -1,6 +1,6 @@
 # Hugo Butterfly 示例网站
 
-简体中文| [English](README-EN.md) | [繁體中文](README-ZH-TW.md)
+**简体中文** | [English](README-EN.md) | [繁體中文](README-ZH-TW.md)
 
 ---
 

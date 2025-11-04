@@ -1,6 +1,6 @@
 # Hugo Butterfly 示例網站
 
-[简体中文](README.md) | [English](README-EN.md) | 繁體中文
+[简体中文](README.md) | [English](README-EN.md) | **繁體中文**
 
 ---
 ### 📖 專案介紹
